@@ -1,0 +1,92 @@
+// USE CASES-
+// GIVEN IN RANGE L-R FIND THE MIN IN GIVEN QUARIES Q
+
+// BRUTE FORCE-
+for (int i=0----->Q){
+ {
+ cin>>L>>R;
+ for(int j-----> J-----R)
+    {
+    int mini = min(mini,a[J])
+    }
+    }
+}
+
+TC- O(Q*(R-L-1))
+in worst case- O(n^2)
+
+but in segment tree TC is in log times
+
+   //  SEGMENT TREE
+   //HEAD=INDEX;
+// FIRST EXECUTION->  
+LEFT NODE=2*INDEX+1;
+  //SECOND EXECUTION-> 
+  RIGHT NODE=2*INDEX+2;
+  
+  TO CODE IT-
+  1- RANGE AND INDEX
+  2-START=0;
+  3-END=N-1;
+  4- ALWAYS TAKE SEGMENT TREE SIZE 4*N   // TO STORE ALL THE VALUE COMPUTING RANGE TO GET MIN
+  
+   
+   
+   // TO FIND MIN IN RANGE QUERIES 
+   // BUILDING OF SEGMENT TREE
+   ST(int ind, int low, int high, int arr[])
+   {
+         if(low==high)
+         {
+          seg[ind]=arr[low];  // base case
+          // if low = high means same range - 0,0 or 1,1 or n-1,n-1 then just take low value in  seg[ind]
+    
+         }
+         
+         int mid= (low+high)>>1; 
+         ST(2*ind+1, low, mid);   // first half
+         ST(2*ind+2,mid+1,high); // second half
+         
+         seg[ind]= min(seg[2*ind+1],seg[2*ind+2]);
+
+        // T.C. ------> O(4N) NO OF NODES VISITED
+   }
+   
+   
+   // QUARY FOR GIVEN RANGE L TO R TO FIND MIN
+   
+   CONDITION-1 PARTIAL OVERLAP OF NODE WITH RANGE L,R
+   CALL-LEFT NODE
+   CALL-RIGHT NODE
+   RETURN LEFT NODE+ RIGHT NODE
+   
+   CONDITION-2 NO OVERLAP WITH RANGE (NOT RESPO FOR L-R)
+   RETURN INT_MAX
+   
+  CONDITION-3 COMPLETE OVERLAP WITH L,R
+  RETURN SEG[INDEX]
+  
+  // BASICALLY GO LEFT NODE TO RIGHT NODE CHECK IF THE NODE IS IN GIVEN RANGE OF L-R IF ITS THEN WE WILL STORE THE MIN IN SEGMENT TREE ARRAY 
+  // IF NOT IN RANGE THEN RETURN INT_MAX AND IN LAST TAKE ALL THE MINIMUMS AND FIND THE MIN OF ALL THEM THAT WILL BE THE ANS
+  
+  int query(int ind,int low, int high,int arr,int l, int r)
+  {
+    // NO OVERLAP
+    if(high<l or r<low) return INT_MAX;
+    
+    // COMPLETE OVERLAP L-R IN RANGE OF LOW AND HIGH
+    if(low>=l && high<=r) return seg[ind];
+    
+    // PARTIAL OVERLAP- GO LEFT NODE THEN RIGHT NODE AND EXECUTE
+    int  mid=(low + high)>>1;
+    int left= query(2*ind+1,low,mid,l,r);
+    int right=query(2*ind+2,mid+1,high,l,r);
+    
+    return min(left, right);
+    
+    // T.C. ----->  O(logN) for all type of ranges
+    
+  
+  }
+   
+   
