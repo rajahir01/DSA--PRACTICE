@@ -31,6 +31,7 @@ void dfssolve()
 
 void dfs(int node)
 {
+  cout<<node<<" ";
   
 vis[node]=1;   // initialize with 1
   // traverse one by one till the depth
@@ -40,5 +41,4 @@ vis[node]=1;   // initialize with 1
   } 
     
   }
-  cout<<node;
 }
