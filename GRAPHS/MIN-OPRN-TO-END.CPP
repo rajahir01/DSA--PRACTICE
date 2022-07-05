@@ -38,3 +38,6 @@ int minmoves(int start, int end, int arr[])
     }
   return -1;
 }
+
+
+// T.C.-------------------> O(END-START+1)
