@@ -31,11 +31,14 @@ void dfssolve()
 
 void dfs(int node)
 {
+  
 vis[node]=1;   // initialize with 1
   // traverse one by one till the depth
   for(auto it: adj[U]){
   if(vis[i]==0)  {  // if not visited 
   dfs(i);   // call dfs
   } 
+    
   }
+  cout<<node;
 }
