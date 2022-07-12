@@ -52,3 +52,40 @@ public:
     }
                         
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// another soln
+
+
+
+class Solution{
+    public:
+    double MedianOfArrays(vector<int>& array1, vector<int>& array2)
+    {
+for(int i=0;i<array2.size();i++){
+           array1.push_back(array2[i]);
+       }
+       sort(array1.begin(),array1.end());
+       int k=array1.size();
+       double sum=0.0;
+       if(k%2==0){
+           sum=array1[(k-1)/2]+array1[k/2];
+           return sum/2;
+       }else{
+           sum=array1[(k-1)/2];
+           return sum;
+       }
+    
+    }
+};
